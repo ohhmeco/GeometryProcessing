@@ -1,0 +1,21 @@
+Estimating the curvature from a vertex in a mesh. There are many ways to do that, the one that compute it with the angle deficit.
+Noi dobbiamo fittare una Monge patch to some points near a pointe
+"fit" cosa vuol dire?
+
+C'è un typo nel documento perchè vogliamo che u sia diviso dalla norma del cross product per renderlo unitario, perchè vogliamo w u e v unitari.
+(Regarding the PDF, there is an important difference with the formulas provided in the corresponding theory session. When computing the local system, all vectors should be normalized, so for v should say:
+u = (OX × w) / |OX × w|
+)
+
+
+Dopo aver ottenuto le variabili come le vogliamo, calcoliamo la error funcion e la minimizziamo.
+
+La soluzione saranno valori per il coefficiente s (a b c d e f), per cui ora posso computare la derivata parziale di w rispetto a u (?)
+
+Per cui ora sappiamo la Hessian matrix, ora posso computare la mean solo da questi 2 eigenvalues (quali??)
+
+Il risultato è un programma in cui avrò una certa palette che mostra uno spettro di curvature che va da positivo a negativo
+
+shere.ply is good for debugging because you know the results
+
+La classe MongePatch è ciò che dobbiamo modificare per risolvere questo problema

@@ -1,0 +1,3 @@
+/home/mb/Uni/UPC/GeometryProcessing/Lab/Lab6/06-parameterization-base/build/CMakeFiles/06-parameterization-base.dir
+/home/mb/Uni/UPC/GeometryProcessing/Lab/Lab6/06-parameterization-base/build/CMakeFiles/edit_cache.dir
+/home/mb/Uni/UPC/GeometryProcessing/Lab/Lab6/06-parameterization-base/build/CMakeFiles/rebuild_cache.dir

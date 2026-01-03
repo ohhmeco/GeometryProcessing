@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/mb/Uni/UPC/GeometryProcessing/Lab/01-icp-base/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

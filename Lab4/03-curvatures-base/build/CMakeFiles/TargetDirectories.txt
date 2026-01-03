@@ -1,0 +1,3 @@
+/home/mb/Uni/UPC/GeometryProcessing/Lab/Lab4/03-curvatures-base/build/CMakeFiles/03-curvatures-base.dir
+/home/mb/Uni/UPC/GeometryProcessing/Lab/Lab4/03-curvatures-base/build/CMakeFiles/edit_cache.dir
+/home/mb/Uni/UPC/GeometryProcessing/Lab/Lab4/03-curvatures-base/build/CMakeFiles/rebuild_cache.dir

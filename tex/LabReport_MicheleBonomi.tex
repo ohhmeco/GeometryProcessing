@@ -1,0 +1,142 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\geometry{a4paper, margin=1in}
+
+\title{Geometry Processing (GPR) - Final Laboratory Report}
+\author{Michele Bonomi}
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Note}
+This document is intended to be also useful for my study sessions for the exams. So if details about definitions and what things are appear, it's because of this reason.
+Code of Lab 1 and Lab 2 have been delivered together.
+
+Also, I'm running the code on a very old PC (Thinkpad X200) that made me have to run the labs through the following script, which is always called script.sh and present in every lab directory.
+
+\begin{verbatim}
+> cat script.sh
+MESA_GL_VERSION_OVERRIDE=3.3 MESA_GLSL_VERSION_OVERRIDE=330 
+./01-icp-base ../scans/bunny/scan0.ply  ../scans/bunny/scan1.ply
+\end{verbatim}
+I don't lknow how much this fact has affected results in terms of quality.
+
+\section{Lab 1: Local PCA and Feature Extraction}
+\textit{Status: Working as intended.}
+
+\textbf{Description:} 
+Principal Component Analysis (PCA) is used to determine the principal components of a d-dimensional point set to estimate local geometry, such as surface normals.
+
+\textbf{Implementation Steps:}
+\begin{itemize}
+    \item Compute the centroid $\tilde{p}$ and center the points: $\tilde{p}_{i} = p_{i} - \tilde{p}$.
+    \item Build the covariance matrix $C = \sum \tilde{p}_{i}\tilde{p}_{i}^{T}$.
+    \item Compute spectral decomposition $C = V \Lambda V^{T}$.
+    \item Sort eigenvalues $\lambda_{1} \ge \lambda_{2} \ge \dots \ge \lambda_{d}$.
+    \item The eigenvector $v_{d}$ corresponding to the smallest eigenvalue approximates the surface normal.
+\end{itemize}
+
+
+\section{Lab 2: Iterative Closest Point (ICP)}
+\textit{Status: Working as intended.}
+
+\textbf{Description:} 
+ICP aligns two point sets through an iterative process of correspondence searching and rigid transformation optimization.
+
+\textbf{Implementation Steps:}
+\begin{itemize}
+    \item \textbf{Border Detection:} Analyze neighbor distribution. Project neighbors onto the local XY-plane using PCA axes, compute polar angles $\alpha_{j} = \text{atan2}(y_{j}, x_{j})$, and identify borders via the maximum angular gap $\Delta \alpha$.
+    \item \textbf{Correspondence:} For each $q_{i} \in Q$, find the closest $p_{j} \in P$.
+    \item \textbf{Optimization:} Compute $S = QP^{T}$ and solve via SVD ($S = U\Sigma V^{T}$) to find $R = VU^{T}$. 
+    \item \textbf{Reflection Fix:} If $\text{det}(R) < 0$, invert the last column of the rotation matrix.
+    \item \textbf{Transformation:} Apply $t = \tilde{p} - R\tilde{q}$ and iterate until convergence.
+\end{itemize}
+
+\begin{center}
+  \includegraphics[scale=0.15]{../screenshot_20260103_025507.png}
+  \includegraphics[scale=0.15]{../screenshot_20260103_025815.png}
+\end{center}
+
+\section{Lab 3: Surface Reconstruction}
+\textit{Status: Working as intended.}
+
+\textbf{Description:} 
+Generation of an implicit function $f(p)$ to represent a surface from unorganized points.
+
+\textbf{Implementation Steps:}
+\begin{itemize}
+    \item \textbf{Hoppe et al. Approach:} Define $f(p)$ as the signed distance to the tangent plane of the closest point $p_{i}$.
+    \item \textbf{RBF Reconstruction:} Solve the system $Ac = v$ using a Radial Basis Function $\phi(r)$.
+    \item \textbf{Constraints:} Create artificial points $p_{i} \pm d \cdot n_{i}$ with values $\pm d$ to define the field and avoid trivial solutions.
+\end{itemize}
+
+\begin{center}
+  \includegraphics[scale=0.15]{../Lab3/Images/screenshot_20260103_031333.png}
+  \includegraphics[scale=0.15]{../Lab3/Images/screenshot_20260103_031341.png}
+\end{center}
+
+\section{Lab 4: Curvature Estimation}
+\textit{Status: Working as intended.}
+
+\textbf{Implementation:}
+Local differential properties are estimated by computing Gaussian ($K$), Mean ($H$), and principal curvatures ($\kappa_{min}, \kappa_{max}$). This is achieved by fitting a local Monge Patch to the neighborhood of each vertex.
+
+\begin{center}
+  \includegraphics[scale=0.25]{../Lab4/Images/Lab4.png}
+\end{center}
+
+\section{Lab 5: Mesh Smoothing}
+\textit{Status: Working as intended.}
+
+\textbf{Description:} 
+Noise reduction through vertex position updates using Laplacian operators.
+
+\textbf{Implementation Steps:}
+\begin{itemize}
+    \item \textbf{Iterative Laplacian:} Update positions as $p_{i}' = p_{i} + \lambda \delta(p_{i})$, where $\delta(p_{i})$ is the average of 1-ring neighbors.
+    \item \textbf{Taubin Smoothing:} To avoid volume loss, a two-step $\lambda-\mu$ update is applied (one positive step $\lambda$, one negative step $\mu$).
+    \item \textbf{Global Laplacian:} Solve $L_{1} P' = b$ where unconstrained vertices satisfy the Laplacian equation (membrane energy).
+    \item \textbf{Global Bilaplacian:} Minimize the Laplacian in a least-squares sense to preserve more geometric structure (thin plate energy).
+\end{itemize}
+
+\begin{center}
+  \includegraphics[scale=0.25]{../Lab5/Images/Lab5_1.png}
+\end{center}
+\begin{center}
+  \includegraphics[scale=0.15]{../Lab5/Images/Lab5_3_Laplacian.png}
+  \includegraphics[scale=0.15]{../Lab5/Images/Lab5_4_Bilaplacian.png}
+  \includegraphics[scale=0.15]{../Lab5/Images/Lab5_LambaNu.png}
+\end{center}
+
+\section{Lab 6: Mesh Parameterization}
+\textit{Status: Working as intended.}
+
+\textbf{Description:} 
+Mapping a mesh with one hole to a 2D square $[0,1] \times [0,1]$ using Harmonic Maps.
+
+\textbf{Implementation Steps:}
+\begin{itemize}
+    \item \textbf{Edge Cycle:} Identify border half-edges (lacking an opposite) and chain them into a closed cycle.
+    \item \textbf{Chord Length Mapping:} Calculate $\lambda = P/L$ for each border vertex and map to the square's perimeter:
+    \begin{itemize}
+        \item If $\lambda < 0.25 \rightarrow (4\lambda, 0)$
+        \item Else if $\lambda < 0.5 \rightarrow (1, 4(\lambda-0.25))$
+        \item Else if $\lambda < 0.75 \rightarrow (1-4(\lambda-0.5), 1)$
+        \item Else $\rightarrow (0, 1-4(\lambda-0.75))$
+    \end{itemize}
+    \item \textbf{Harmonic System:} Solve the global system $L U = B$ with fixed boundary conditions and uniform Laplacian weights for internal vertices.
+\end{itemize}
+
+\begin{center}
+  \includegraphics[scale=0.15]{../Lab6/Images/Lab6_1.png}
+  \includegraphics[scale=0.15]{../Lab6/Images/Lab6_2.png}
+\end{center}
+
+\end{document}

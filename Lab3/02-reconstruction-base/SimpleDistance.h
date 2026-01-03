@@ -1,0 +1,31 @@
+#ifndef _SIMPLE_DISTANCE_INCLUDE
+#define _SIMPLE_DISTANCE_INCLUDE
+
+#define GLM_ENABLE_EXPERIMENTAL
+
+#include <glm/glm.hpp>
+#include "ImplicitFunction.h"
+#include "PointCloud.h"
+#include "NearestNeighbors.h"
+
+
+class SimpleDistance : public ImplicitFunction
+{
+
+public:
+	void init(const PointCloud *pointCloud, float samplingRadius);
+
+	bool operator()(const glm::vec3 &P, float &value) const;
+	
+private:
+	NearestNeighbors knn;
+	const PointCloud *cloud;
+	float radius;
+
+};
+
+
+#endif // _SIMPLE_DISTANCE_INCLUDE
+
+
+

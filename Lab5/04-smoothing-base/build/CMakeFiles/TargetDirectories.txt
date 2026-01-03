@@ -1,0 +1,3 @@
+/home/mb/Uni/UPC/GeometryProcessing/Lab/Lab5/04-smoothing-base/build/CMakeFiles/04-smoothing-base.dir
+/home/mb/Uni/UPC/GeometryProcessing/Lab/Lab5/04-smoothing-base/build/CMakeFiles/edit_cache.dir
+/home/mb/Uni/UPC/GeometryProcessing/Lab/Lab5/04-smoothing-base/build/CMakeFiles/rebuild_cache.dir
