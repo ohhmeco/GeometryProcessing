@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2026/dev/Arch Linux) (preloaded format=xelatex 2025.12.4)  3 JAN 2026 15:38
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2026/dev/Arch Linux) (preloaded format=xelatex 2025.12.4)  6 JAN 2026 19:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -397,11 +397,8 @@ Package hyperref Info: Link coloring ON on input line 22.
 \@outlinefile=\write3
 \openout3 = `LabReport_MicheleBonomi.out'.
 
-
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
-
 LaTeX Font Info:    Trying to load font information for U+msa on input line 25.
+
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -432,8 +429,8 @@ File: ../Lab3/Images/screenshot_20260103_031341.png Graphic file (type bmp)
 
 
 [2]
-File: ../Lab4/Images/Lab4.png Graphic file (type bmp)
-<../Lab4/Images/Lab4.png>
+File: ../Lab4/Images/screenshot_20260106_191454.png Graphic file (type bmp)
+<../Lab4/Images/screenshot_20260106_191454.png>
 File: ../Lab5/Images/Lab5_1.png Graphic file (type bmp)
 <../Lab5/Images/Lab5_1.png>
 
@@ -459,22 +456,15 @@ File: ../Lab6/Images/Lab6_2.png Graphic file (type bmp)
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-
-Package rerunfilecheck Warning: File `LabReport_MicheleBonomi.out' has changed.
-
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `LabReport_MicheleBonomi.out':
-(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
-(rerunfilecheck)             After:  B09C36845DB46A174A36D34D00328D70;1233.
+Package rerunfilecheck Info: File `LabReport_MicheleBonomi.out' has not changed
+.
+(rerunfilecheck)             Checksum: B09C36845DB46A174A36D34D00328D70;1233.
  ) 
 Here is how much of TeX's memory you used:
- 10642 strings out of 475413
- 169305 string characters out of 5765576
- 585865 words of memory out of 5000000
- 33454 multiletter control sequences out of 15000+600000
+ 10643 strings out of 475413
+ 169505 string characters out of 5765576
+ 587240 words of memory out of 5000000
+ 33455 multiletter control sequences out of 15000+600000
  565478 words of font info for 72 fonts, out of 8000000 for 9000
  264 hyphenation exceptions out of 8191
  72i,7n,79p,313b,471s stack positions out of 10000i,1000n,20000p,200000b,200000s

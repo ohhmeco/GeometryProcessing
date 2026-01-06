@@ -20,7 +20,7 @@ void MongePatch::principalCurvatures(float &kmin, float &kmax) const
     }
 
     // (u, v, w), w is normal
-    glm::vec3 w = glm::normalize(_normal);
+    glm::vec3 w = -glm::normalize(_normal); // w = -n
     
     glm::vec3 OX(1.0f, 0.0f, 0.0f);
     if (std::abs(glm::dot(OX, w)) > 0.9f) {
@@ -54,10 +54,10 @@ void MongePatch::principalCurvatures(float &kmin, float &kmax) const
     float c = s(2);
 
    // H = [2a  b]
-    //     [b  2c]
+    //      [b  2c]
     Eigen::Matrix2f Hessian;
     Hessian << 2.0f * a, b,
-               b, 2.0f * c;
+                b, 2.0f * c;
 
     Eigen::SelfAdjointEigenSolver<Eigen::Matrix2f> solver(Hessian);
     
